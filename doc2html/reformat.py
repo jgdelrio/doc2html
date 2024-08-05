@@ -6,6 +6,8 @@ import tempfile
 from fastapi import UploadFile
 from io import BytesIO
 import mammoth
+import pdfplumber
+from bs4 import BeautifulSoup
 
 from doc2html import config as cfg, schemas, server
 
@@ -13,7 +15,10 @@ from doc2html import config as cfg, schemas, server
 async def unoserver_convert(
         file_name: Path, file_obj: UploadFile, to_: str,
         interface: str = cfg.TRANSFORM_HOST, port: str = cfg.UNOSERVER_PORT) -> Tuple[bool, Any]:
-    """Receives the file data and transform the contents to the requested format"""
+    """
+    Receives the file data and transform the contents to the requested format
+    using libreoffice (on unoserver)
+    """
     filters = []
     # At the moment unoserver does not detect correctly the filter to use with certain extensions...
     if Path(file_name).suffix in (".pdf", ".ppt", ".pptx"):
@@ -68,6 +73,7 @@ async def unoserver_convert(
 
 
 async def mammoth_convert(file_name: Path, file_obj: UploadFile, to_: str) -> Tuple[bool, Any]:
+    """Transform docx to html or text"""
     if Path(file_name).suffix not in (".doc", ".docx"):
         raise Exception("File extension must be .doc or .docx")
     to_ = "html" if to_ == "htm" else to_
@@ -86,12 +92,54 @@ async def mammoth_convert(file_name: Path, file_obj: UploadFile, to_: str) -> Tu
         result = convert_func(doc_stream)
         extracted_data = result.value  # The generated HTML or raw text
         messages = result.messages  # Any messages, such as warnings during conversion
+        if messages:
+            cfg.logger.warning(f"{messages}")
 
         return True, extracted_data
 
     except Exception as err:
         cfg.logger.error("Exception occurred while converting document: %s", str(err))
         return False, str(err)
+
+
+async def plumber_convert(file_name: Path, file_obj: UploadFile, to_: str) -> Tuple[bool, Any]:
+    """Transform pdf to html"""
+    if to_ not in ("html", "htm"):
+        raise ValueError("Format conversion must be to html or htm")
+
+    bytes_data = await file_obj.read()
+
+    with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as tmp_input:
+
+        tmp_input.write(bytes_data)
+        tmp_input.flush()  # Ensure data is written
+
+        try:
+
+            with pdfplumber.open(tmp_input) as pdf:
+                soup = BeautifulSoup(
+                    '<html><head><style>.pdf-text { position: absolute; }</style></head><body></body></html>',
+                    'html.parser'
+                )
+                body = soup.body
+
+                for idx, page in enumerate(pdf.pages):
+                    page_div = soup.new_tag("div", style=f"position: relative; width: {page.width}pt; height: {page.height}pt;")
+                    body.append(page_div)
+
+                    for char in page.extract_words():
+                        left = char['x0']
+                        top = char['top']
+                        text = char['text']
+
+                        span = soup.new_tag("span", **{"class": "pdf-text", "style": f"left: {left}pt; top: {top}pt;"})
+                        span.string = text
+                        page_div.append(span)
+        except Exception as err:
+            cfg.logger.error("Exception occurred while converting document: %s", str(err))
+            return False, str(err)
+
+    return True, str(soup)
 
 
 DEFAULT_PARSERS = {

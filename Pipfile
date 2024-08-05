@@ -13,6 +13,8 @@ pydantic = "*"
 requests = "*"
 virtualenv = "*"
 mammoth = "*"
+pdfplumber = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 pytest = "*"

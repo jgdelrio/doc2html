@@ -19,6 +19,7 @@ def is_unoserver_running(
 
 
 def sync_start_uno_server(interface=cfg.TRANSFORM_HOST, port=cfg.UNOSERVER_PORT, executable_path=None) -> bool:
+    """Synchronously starts unoserver"""
     if is_unoserver_running(interface=interface, port=port):
         cfg.logger.info("Unoserver is already running.")
         return True
@@ -64,10 +65,12 @@ def sync_start_uno_server(interface=cfg.TRANSFORM_HOST, port=cfg.UNOSERVER_PORT,
 
 
 async def start_unoserver(interface=cfg.TRANSFORM_HOST, port=cfg.UNOSERVER_PORT, executable_path=None) -> bool:
+    """Asynchronously starts unoserver"""
     return sync_start_uno_server(interface=interface, port=port, executable_path=executable_path)
 
 
-async def handle_start_unoserver():
+async def handle_start_unoserver() -> None:
+    """Initialization of Unoserver with exception management"""
     try:
         is_active = await start_unoserver()
     except Exception as err:
@@ -79,3 +82,12 @@ async def handle_start_unoserver():
 
     if not is_active:
         raise Exception("Unoserver failed to start")
+
+
+def allocate_unoserver_environment() -> None:
+    """Run the script for Unoserver environment allocation"""
+    rc = subprocess.call("./doc2html/allocate_unoserver.sh")
+    if rc == 0:
+        cfg.logger.info("Environment allocation finished.")
+    else:
+        cfg.logger.error("Something went wrong while allocating Unoserver environment.")
