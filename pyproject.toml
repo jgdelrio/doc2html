@@ -1,3 +1,5 @@
+# Choosing a build backend:
+# https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
@@ -6,13 +8,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "doc2html"
 #version = "v0.0.1"
-dynamic = ["version"]
+version = "0.0.1"
 dependencies = [
     "unoserver",
     "virtualenv>=20.26.3",
     "beautifulsoup4>=4.12.3",
     "mammoth>=1.8.0",
-    "pdfpluber>=0.11.2"
+    "pdfplumber>=0.11.2"
 ]
 requires-python = ">= 3.9"
 
@@ -22,10 +24,10 @@ authors = [
 maintainers = [
   {name = "Jose del Rio", email = "jgregrs@yahoo.es"},
 ]
-url = "https://github.com/jgdelrio/doc2html"
-download_url = "https://github.com/jgdelrio/doc2html/releases/download/v0.0.1/doc2html-0.0.0.tar.gz"
+# This field corresponds to the "Description" metadata field:
+# https://packaging.python.org/specifications/core-metadata/#description-optional
 description = "Convert documents between formats. For example docx to html or pdf to html"
-readme = {file = "README.txt", content-type = "text/markdown"}
+readme = {file = "README.md", content-type = "text/markdown"}
 license = {file = "LICENSE"}
 keywords = ["document", "transformation", "docx", "pdf", "pptx", "html"]
 classifiers = [
@@ -62,5 +64,6 @@ Documentation = "https://github.com/jgdelrio/doc2html"
 Repository = "https://github.com/jgdelrio/doc2html.git"
 Issues = "https://github.com/jgdelrio/doc2html/issues"
 
+# python -m build
 # pip install twine
 # twine upload dist/*
