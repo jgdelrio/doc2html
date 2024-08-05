@@ -48,6 +48,13 @@ Or using docker-compose
 
 A build image [is available](https://hub.docker.com/repository/docker/jgdelrio/doc2html/general)
 
+Use:
+```
+docker pull jgdelrio/doc2html:v0.0.1
+
+docker run -p 5000:5000 -t jgdelrio/doc2html:v0.0.1
+```
+
 ### Fonts
 You may encounter a font issue with certain documents (ex: pdf).
 One option is to bring fonts from Windows into your system.
