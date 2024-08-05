@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  unoserver_fastapi:
+  doc2html:
     build:
       context: .
       dockerfile: Dockerfile

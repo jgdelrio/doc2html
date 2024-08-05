@@ -11,7 +11,7 @@ And the integration of Unoserver with the python libraries is not straightforwar
 Install Docker and familiarise yourself with it.
   ```
   docker build -t doc2html:v0 .
-  docker run doc2html:v0
+  docker run -p 5000:5000 -t doc2html:v0
   ```
 
 Or using docker-compose
@@ -40,7 +40,7 @@ Or using docker-compose
   ```
   pipenv shell
   
-  gunicorn main:app --workers 2 -b :5000 -k uvicorn.workers.UvicornWorker --timeout 60
+  gunicorn main:app --workers 1 -b :5000 -k uvicorn.workers.UvicornWorker --timeout 60
   ```
 
 

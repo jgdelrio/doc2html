@@ -35,9 +35,9 @@ RUN virtualenv --python=/usr/bin/python3 --system-site-packages /environments/vi
 RUN /environments/virtenv/bin/pip install unoserver
 
 # Install application into container
-COPY . .
+COPY ./ ./
 
 # Expose the port the app runs on
 EXPOSE $PORT/tcp
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 4 --timeout 30 main:app
+CMD exec gunicorn main:app --bind :$PORT --workers 1 --threads 4 -k uvicorn.workers.UvicornWorker --timeout 30

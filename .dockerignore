@@ -1,6 +1,5 @@
 .pypirc
 
 dist/
-doc2html
 doc2html.egg-info
 environments/

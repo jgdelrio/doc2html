@@ -14,7 +14,9 @@ dependencies = [
     "virtualenv>=20.26.3",
     "beautifulsoup4>=4.12.3",
     "mammoth>=1.8.0",
-    "pdfplumber>=0.11.2"
+    "pdfplumber>=0.11.2",
+    "python-multipart",
+    "fastapi"
 ]
 requires-python = ">= 3.9"
 

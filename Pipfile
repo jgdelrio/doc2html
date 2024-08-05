@@ -15,6 +15,7 @@ virtualenv = "*"
 mammoth = "*"
 pdfplumber = "*"
 beautifulsoup4 = "*"
+python-multipart = "*"
 
 [dev-packages]
 pytest = "*"
