@@ -22,8 +22,6 @@ authors = [
 maintainers = [
   {name = "Jose del Rio", email = "jgregrs@yahoo.es"},
 ]
-url = "https://github.com/jgdelrio/doc2html"
-download_url = "https://github.com/jgdelrio/doc2html/releases/download/v0.0.1/doc2html-0.0.0.tar.gz"
 description = "Convert documents between formats. For example docx to html or pdf to html"
 readme = {file = "README.txt", content-type = "text/markdown"}
 license = {file = "LICENSE"}
