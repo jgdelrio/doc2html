@@ -64,5 +64,6 @@ Documentation = "https://github.com/jgdelrio/doc2html"
 Repository = "https://github.com/jgdelrio/doc2html.git"
 Issues = "https://github.com/jgdelrio/doc2html/issues"
 
+# python -m build
 # pip install twine
 # twine upload dist/*

@@ -1,4 +1,4 @@
-# unoserver-fastapi
+# Doc2html
 
 ## Introduction
 This server creates API access to Unoserver (LibreOffice) using FastApi.
@@ -10,8 +10,8 @@ We recommend that you use the provided Dockerfile, as the server requires LibreO
 And the integration of Unoserver with the python libraries is not straightforward. 
 Install Docker and familiarise yourself with it.
   ```
-  docker build -t unoserver-fastapi:v0 .
-  docker run unoserver-fastapi:v0
+  docker build -t doc2html:v0 .
+  docker run doc2html:v0
   ```
 
 Or using docker-compose
@@ -42,6 +42,11 @@ Or using docker-compose
   
   gunicorn main:app --workers 2 -b :5000 -k uvicorn.workers.UvicornWorker --timeout 60
   ```
+
+
+### Docker image
+
+A build image [is available](https://hub.docker.com/repository/docker/jgdelrio/doc2html/general)
 
 ### Fonts
 You may encounter a font issue with certain documents (ex: pdf).
@@ -96,3 +101,6 @@ for each unoserver's --port and --uno-port options.
 - A next step may include managing multiple unoservers for the requests.
 - Only LibreOffice is officially supported. Other variations are untested.
 - Some samples have been downloaded from [sample-videos.com](https://sample-videos.com/download-sample-doc-file.php)
+
+docker tag doc2html:v0 jgdelrio/doc2html:v0.0.1
+docker push jgdelrio/doc2html:v0.0.1
