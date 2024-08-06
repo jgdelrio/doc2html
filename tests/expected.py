@@ -53,6 +53,7 @@ Title</b></span></font></font></font></p>
 </p>
 </body>
 </html>"""
+
 EXPECTED_PDF_OUTPUT = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
      "http://www.w3.org/TR/html4/transitional.dtd">
 <html>
@@ -78,6 +79,9 @@ EXPECTED_PDF_OUTPUT = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transition
 <p> </p>
 </body>
 </html>"""
+
+
+EXPECTED_PDF1_PLUNDER_OUTPUT = """<html><head><style>.pdf-text { position: absolute; }</style></head><body><div style="position: relative; width: 595.32pt; height: 841.92pt;"><span class="pdf-text" style="left: 36.0pt; top: 30.308400000000006pt;">DR</span><span class="pdf-text" style="left: 57.144pt; top: 30.32244000000003pt;">Peter</span><span class="pdf-text" style="left: 96.13308pt; top: 30.32244000000003pt;">Griffin</span></div><div style="position: relative; width: 595.32pt; height: 841.92pt;"></div></body></html>"""
 
 EXPECTED_PPTX_OUTPUT = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"\n     "http://www.w3.org/TR/html4/transitional.dtd">\n<html>\n<head>\n\n  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>\n  <title>Fake CV</title>\n  <meta name="generator" content="LibreOffice 24.2.4.2 (Linux)"/>\n  <meta name="created" content="2016-03-16T05:57:48"/>\n  <meta name="changed" content="2024-07-29T13:44:56"/>\n  <meta name="AppVersion" content="15.0000"/>\n  <meta name="ContentTypeId" content="0x010100A77FF1A31B144B46A2B5E8D6ABDC0DE8"/>\n  <meta name="PresentationFormat" content="Custom"/>\n  <meta name="Slides" content="1"/>\n</head>\n<body>\n<h1></h1>\n<p><b>Background</b></p>\n<ul>\n<ul>\n<ul>\n<ul>\n<li>1</li>\n</ul>\n</ul>\n</ul>\n</ul>\n<p><b>Skills</b></p>\n<p>Important Guy</p>\n</body>\n</html>"""
 

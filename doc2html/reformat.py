@@ -103,7 +103,7 @@ async def mammoth_convert(file_name: Path, file_obj: UploadFile, to_: str) -> Tu
 
 
 async def plumber_convert(file_name: Path, file_obj: UploadFile, to_: str) -> Tuple[bool, Any]:
-    """Transform pdf to html"""
+    """Transform pdf to html using pdfplumber although the conversion is quite simple..."""
     if to_ not in ("html", "htm"):
         raise ValueError("Format conversion must be to html or htm")
 

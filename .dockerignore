@@ -1,4 +1,5 @@
 .pypirc
+run_checks.*
 
 dist/
 doc2html.egg-info
