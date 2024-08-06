@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 .pypirc
+run_checks.*
 
 # C extensions
 *.so
